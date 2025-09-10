@@ -1,0 +1,111 @@
+@import "../../../../assets/styles/variables";
+
+footer.footer {
+  padding: 40px 0 54px;
+  background-color: #b9d5fd;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+
+  .container {
+    .footer-top {
+      display: flex;
+      margin-bottom: 40px;
+
+      .logo {
+        text-align: center;
+        color: $blue-text-color;
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-decoration: none;
+        margin-right: 40px;
+      }
+
+      .footer-menu nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+
+        color: $dark-blue-text-color;
+
+        li a {
+          text-decoration: none;
+          color: $dark-blue-text-color;
+          cursor: pointer;
+          transition: color 0.5s;
+          &:hover {
+            color: $dark-blue-text-color-hover;
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      display: flex;
+      gap: 60px;
+
+      .footer-bottom-block {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &:first-child {
+          max-width: 253px;
+          gap: 15px;
+        }
+
+        .footer-bottom-block-title {
+          color: $blue-text-color;
+          font-weight: 500;
+
+          &:last-child {
+            margin-bottom: 15px;
+          }
+        }
+
+        .footer-bottom-block-text {
+          text-decoration: none;
+          color: $dark-blue-text-color;
+          line-height: 130%;
+          transition: 0.5s;
+          &:hover {
+            color: $dark-blue-text-color-hover;
+          }
+        }
+
+        .footer-bottom-block-actions {
+          display: flex;
+          gap: 12px;
+
+          a {
+            transition: 0.5s;
+
+            &:hover svg path {
+              fill: $dark-blue-text-color-hover;
+            }
+          }
+        }
+
+        .button {
+          border: 0;
+          padding: 10px 20px;
+          font-size: 12px;
+          transition: 0.5s;
+          &:hover {
+            background-color: $dark-blue-text-color-hover;
+          }
+        }
+      }
+    }
+
+    .footer-roots {
+      margin-top: 6px;
+
+      color: $blue-text-color;
+    }
+  }
+}

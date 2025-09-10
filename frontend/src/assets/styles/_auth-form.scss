@@ -1,0 +1,98 @@
+@import "mixins";
+@import "variables";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 229px;
+
+  .auth-form {
+    margin-top: 14px;
+    margin-bottom: 92px;
+
+    .auth-title {
+      @include head-lora-36;
+      margin-bottom: 40px;
+    }
+
+    .auth-inputs {
+      margin-bottom: 40px;
+
+      .auth-input {
+        margin-bottom: 5px;
+
+        .input {
+          width: 422px;
+        }
+
+        &:last-child {
+          margin-bottom: 10px;
+        }
+
+        .error-message {
+          color: red;
+          font-size: 12px;
+          margin-top: 5px;
+          width: 421px;
+        }
+      }
+
+      .auth-checkbox {
+        max-width: 422px;
+        display: flex;
+        align-items: baseline;
+
+        input {
+          margin: 0;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        label {
+          color: $dark-blue-text-color;
+          font-size: 14px;
+          line-height: 130%;
+          margin-left: 10px;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          a {
+            color: #709fdc;
+            &:hover {
+              color: $dark-blue-text-color-hover;
+            }
+          }
+        }
+      }
+    }
+
+    .auth-button {
+      margin-top: 30px;
+
+      button.button {
+        width: 422px;
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+    }
+
+    .auth-link {
+      margin-top: 10px;
+      color: $dark-blue-text-color;
+
+      a {
+        color: #709fdc;
+        text-decoration: none;
+        transition: 0.5s;
+
+        &:hover {
+          color: $dark-blue-text-color-hover;
+        }
+      }
+    }
+  }
+}

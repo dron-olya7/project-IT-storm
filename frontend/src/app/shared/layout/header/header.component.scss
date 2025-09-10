@@ -1,0 +1,104 @@
+@import "../../../../assets/styles/variables";
+
+header.header {
+  padding: 40px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  background: #fff;
+
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .logo {
+      text-decoration: none;
+      margin-right: 100px;
+    }
+
+    .header-menu nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      padding: 0;
+      margin-right: 257px;
+
+      li a {
+        cursor: pointer;
+        color: $dark-blue-text-color;
+        text-decoration: none;
+        transition: 0.5s;
+
+        &.active {
+          color: $blue-text-color;
+        }
+
+        &:hover {
+          color: $dark-blue-text-color-hover;
+        }
+      }
+    }
+
+    .header-phone {
+      color: $blue-text-color;
+      text-decoration: none;
+      transition: 0.5s;
+
+      &:hover {
+        color: $dark-blue-text-color-hover;
+      }
+    }
+
+    .header-actions {
+      color: $dark-blue-text-color;
+      text-decoration: none;
+      justify-content: flex-end;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 0;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        color: $dark-blue-text-color-hover;
+
+        a {
+          color: $dark-blue-text-color-hover;
+        }
+
+        svg path {
+          stroke: $dark-blue-text-color-hover;
+        }
+      }
+
+      svg:hover path {
+        stroke: $dark-blue-text-color-hover;
+      }
+
+      a {
+        margin-left: 7px;
+        text-decoration: none;
+        color: $dark-blue-text-color;
+        transition: color 0.5s;
+
+        &:hover {
+          color: $dark-blue-text-color-hover;
+        }
+      }
+
+      svg {
+        transition: stroke 0.5s;
+
+        path {
+          transition: stroke 0.5s;
+        }
+      }
+    }
+  }
+}
