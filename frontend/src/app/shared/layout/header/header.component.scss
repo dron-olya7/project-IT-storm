@@ -100,5 +100,13 @@ header.header {
         }
       }
     }
+
+    .header-auth-section {
+      .user-welcome {
+        display: flex;
+        align-items: center;
+        
+      }
+    }
   }
 }

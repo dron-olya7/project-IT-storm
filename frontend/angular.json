@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-diplom-app": {
+    "project-IT-storm": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-diplom-app",
+            "outputPath": "dist/project-IT-storm",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my-diplom-app:build:production"
+              "browserTarget": "project-IT-storm:build:production"
             },
             "development": {
-              "browserTarget": "my-diplom-app:build:development"
+              "browserTarget": "project-IT-storm:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-diplom-app:build"
+            "browserTarget": "project-IT-storm:build"
           }
         },
         "test": {
