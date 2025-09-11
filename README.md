@@ -54,5 +54,5 @@ cd frontend
 
 npm i
 
-ng serve --open
+ng serve
 
