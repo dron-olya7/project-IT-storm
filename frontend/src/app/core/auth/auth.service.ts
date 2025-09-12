@@ -32,31 +32,33 @@ export class AuthService {
     }
 
     logout(): Observable<DefaultResponseType> {
-        const tokens = this.getTokens();
+        let tokens: { accessToken: string | null; refreshToken: string | null };
+        tokens = this.getTokens();
         if (tokens && tokens.refreshToken) {
             return this.http.post<DefaultResponseType>(environment.api + 'logout', {
                 refreshToken: tokens.refreshToken
             });
         }
-        throw throwError(() => 'Can not find tokens');
+        throw throwError(() :string => 'Can not find tokens');
     }
 
     refresh(): Observable<DefaultResponseType | LoginResponseType> {
-        const tokens = this.getTokens();
+        let tokens: { accessToken: string | null; refreshToken: string | null };
+        tokens = this.getTokens();
 
         if (tokens && tokens.refreshToken) {
             return this.http.post<DefaultResponseType>(environment.api + 'refresh', {
                 refreshToken: tokens.refreshToken
             });
         }
-        throw throwError(() => 'Can not use token');
+        throw throwError(() :string => 'Can not use token');
     }
 
-    public getIsLoggedIn() {
+    public getIsLoggedIn() :boolean {
         return this.isLogged;
     }
 
-    public setTokens(accessToken: string, refreshToken: string) {
+    public setTokens(accessToken: string, refreshToken: string) :void {
         localStorage.setItem(this.accessTokenKey, accessToken);
         localStorage.setItem(this.refreshTokenKey, refreshToken);
         this.isLogged = true;

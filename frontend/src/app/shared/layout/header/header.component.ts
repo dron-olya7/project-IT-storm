@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
+import {DefaultResponseType} from "../../../../types/default-response.type";
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,7 @@ export class HeaderComponent {
   ngOnInit() {
     if (this.isLogged) {
       this.userService.getUserInfo()
-        .subscribe(data => {
+        .subscribe((data: UserInfoType | DefaultResponseType) => {
           this.userInfo = data as UserInfoType;
         });
     }
@@ -37,7 +38,7 @@ export class HeaderComponent {
 
         if (this.isLogged) {
           this.userService.getUserInfo()
-            .subscribe(data => {
+            .subscribe((data: UserInfoType | DefaultResponseType)  => {
               this.userInfo = data as UserInfoType;
             });
         }
@@ -68,7 +69,7 @@ export class HeaderComponent {
     if (this.router.url === '/') {
       // Добавляем задержку для полной загрузки страницы
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
+        const element :HTMLElement|null = document.getElementById(sectionId);
         if (element) {
           // Плавная прокрутка к элементу
           element.scrollIntoView({
@@ -89,7 +90,7 @@ export class HeaderComponent {
         .then(() => {
           // После навигации добавляем задержку для прокрутки
           setTimeout(() => {
-            const element = document.getElementById(sectionId);
+            const element :HTMLElement|null = document.getElementById(sectionId);
             if (element) {
               element.scrollIntoView({
                 behavior: 'smooth',

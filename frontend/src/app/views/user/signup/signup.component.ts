@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit{
               error = (data as DefaultResponseType).message;
             }
 
-            let loginResponse = data as LoginResponseType;
+            let loginResponse: LoginResponseType = data as LoginResponseType;
             if (!loginResponse.accessToken || !loginResponse.refreshToken || !loginResponse.userId) {
               error = 'Ошибка авторизации';
             }

@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ArticleType} from "../../../../types/article.type";
 import {ArticleService} from "../../../shared/services/article.service";
 import {CategoryType} from "../../../../types/category.type";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ActiveParamsType} from "../../../../types/active-params.type";
 import {ActiveParamsUtils} from "../../../shared/utils/active-params.utils";
 import { AppliedFilterType } from 'src/types/applied-filter.type';
@@ -38,12 +38,12 @@ export class BlogComponent implements OnInit{
           this.categories = data;
 
           this.activatedRoute.queryParams
-              .subscribe(params => {
+              .subscribe((params: Params) => {
                 this.activeParams = ActiveParamsUtils.processParams(params);
 
                 this.appliedFilters = [];
-                this.activeParams.categories.forEach(url => {
-                  const paramName = this.categories.find(item => item.url === url);
+                this.activeParams.categories.forEach((url: string) => {
+                  const paramName: CategoryType | undefined = this.categories.find((item: CategoryType) => item.url === url);
 
                   if (paramName) {
                     this.appliedFilters.push({
@@ -54,7 +54,7 @@ export class BlogComponent implements OnInit{
                 })
 
                 this.articleService.getArticles(this.activeParams)
-                    .subscribe(data => {
+                    .subscribe((data: { count: number; pages: number; items: ArticleType[] }) => {
                       this.articles = data.items;
                       this.pages = [];
 
@@ -72,10 +72,10 @@ export class BlogComponent implements OnInit{
 
   updateCategories(url: string) {
     if (this.activeParams.categories && this.activeParams.categories.length > 0) {
-      const existingCategoryInParams = this.activeParams.categories.find(item => item == url);
+      const existingCategoryInParams: string | undefined = this.activeParams.categories.find((item: string) => item == url);
 
       if (existingCategoryInParams) {
-        this.activeParams.categories = this.activeParams.categories.filter(item => item != url);
+        this.activeParams.categories = this.activeParams.categories.filter((item: string) => item != url);
       } else {
         this.activeParams.categories = [...this.activeParams.categories, url];
       }
@@ -90,7 +90,7 @@ export class BlogComponent implements OnInit{
   }
 
   removeAppliedFilter(appliedFilter: AppliedFilterType) {
-    this.activeParams.categories = this.activeParams.categories.filter(item => item !== appliedFilter.urlParam);
+    this.activeParams.categories = this.activeParams.categories.filter((item: string) => item !== appliedFilter.urlParam);
     this.activeParams.page = 1;
 
     this.router.navigate(['/blog'], {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import { ArticleService } from '../../../shared/services/article.service';
 import { DetailArticleType } from '../../../../types/detail-article.type';
 import { environment } from '../../../../environments/environment.development';
@@ -10,6 +10,7 @@ import { UserInfoType } from '../../../../types/user-info.type';
 import { DefaultResponseType } from '../../../../types/default-response.type';
 import { CommentService } from '../../../shared/services/comment.service';
 import { CommentType } from '../../../../types/comment.type';
+import {CommentActionType} from "../../../../types/comment-action.type";
 
 @Component({
     selector: 'app-detail',
@@ -55,7 +56,7 @@ export class DetailComponent implements OnInit {
                 });
         }
 
-        this.activatedRoute.params.subscribe((params) => {
+        this.activatedRoute.params.subscribe((params: Params) => {
             this.scrollToTop();
             this.isLoading = true; // Снова показываем загрузку при смене статьи
 
@@ -70,7 +71,7 @@ export class DetailComponent implements OnInit {
                     if (this.isLogged) {
                         this.commentService
                             .getCommentsActions(this.article.id)
-                            .subscribe((data) => {
+                            .subscribe((data: CommentActionType[]) => {
                                 this.commentActions = data;
                             });
                     }
@@ -111,7 +112,7 @@ export class DetailComponent implements OnInit {
 
         this.commentService
             .getComments({ offset: this.commentOffset, article: this.article.id })
-            .subscribe((data) => {
+            .subscribe((data: { count: number; comments: CommentType[] }) => {
                 this.comments.push(...data.comments);
             });
     }

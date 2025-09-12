@@ -33,7 +33,7 @@ export class CommentComponent implements OnInit {
 
       if (this.isLogged) {
         this.commentService.getCommentAction(this.comment.id)
-          .subscribe(data => {
+          .subscribe((data: CommentType[])  => {
             if (data.length > 0 && data[0].action) {
               this.statusAction = data[0].action;
             }
@@ -46,11 +46,11 @@ export class CommentComponent implements OnInit {
     if (this.isLogged) {
       if (this.comment) {
         this.commentService.applyAction(this.comment.id, 'like')
-          .subscribe(data => {
+          .subscribe((data: DefaultResponseType) => {
 
             if (this.comment) {
               this.commentService.getCommentAction(this.comment.id)
-                .subscribe(data => {
+                .subscribe((data: CommentType[]) => {
                   if (data.length > 0 && data[0].action) {
                     if (this.statusAction === 'dislike') {
                       this.dislikeCount --;
@@ -76,11 +76,11 @@ export class CommentComponent implements OnInit {
     if (this.isLogged) {
       if (this.comment) {
         this.commentService.applyAction(this.comment.id, 'dislike')
-          .subscribe(data => {
+          .subscribe((data: DefaultResponseType) => {
 
             if (this.comment && this.isLogged) {
               this.commentService.getCommentAction(this.comment.id)
-                .subscribe(data => {
+                .subscribe((data: CommentType[]) => {
                   if (data.length > 0 && data[0].action) {
                     if (this.statusAction === 'like') {
                       this.likeCount --;

@@ -12,7 +12,7 @@ export class ArticleCardComponent implements OnInit{
 
   @Input() article: ArticleType = {} as ArticleType;
 
-  serverStaticPath = environment.serverStaticPath;
+  serverStaticPath :string = environment.serverStaticPath;
   constructor(private router: Router) {
 
   }
