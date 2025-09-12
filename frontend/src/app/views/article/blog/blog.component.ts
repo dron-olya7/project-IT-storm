@@ -7,7 +7,6 @@ import {ActiveParamsType} from "../../../../types/active-params.type";
 import {ActiveParamsUtils} from "../../../shared/utils/active-params.utils";
 import { AppliedFilterType } from 'src/types/applied-filter.type';
 
-
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -29,37 +28,42 @@ export class BlogComponent implements OnInit{
   }
 
   ngOnInit() {
+    // Просто устанавливаем скролл в самый верх один раз
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+
     this.articleService.getCategories()
-      .subscribe((data: CategoryType[]) => {
-        this.categories = data;
+        .subscribe((data: CategoryType[]) => {
+          this.categories = data;
 
-        this.activatedRoute.queryParams
-          .subscribe(params => {
-            this.activeParams = ActiveParamsUtils.processParams(params);
+          this.activatedRoute.queryParams
+              .subscribe(params => {
+                this.activeParams = ActiveParamsUtils.processParams(params);
 
-            this.appliedFilters = [];
-            this.activeParams.categories.forEach(url => {
-              const paramName = this.categories.find(item => item.url === url);
+                this.appliedFilters = [];
+                this.activeParams.categories.forEach(url => {
+                  const paramName = this.categories.find(item => item.url === url);
 
-              if (paramName) {
-                this.appliedFilters.push({
-                  name: paramName.name,
-                  urlParam: url
+                  if (paramName) {
+                    this.appliedFilters.push({
+                      name: paramName.name,
+                      urlParam: url
+                    })
+                  }
                 })
-              }
-            })
 
-            this.articleService.getArticles(this.activeParams)
-              .subscribe(data => {
-                this.articles = data.items;
-                this.pages = [];
+                this.articleService.getArticles(this.activeParams)
+                    .subscribe(data => {
+                      this.articles = data.items;
+                      this.pages = [];
 
-                for (let i = 1; i <= data.pages; i++) {
-                  this.pages.push(i);
-                }
-              });
-          })
-      });
+                      for (let i = 1; i <= data.pages; i++) {
+                        this.pages.push(i);
+                      }
+                    });
+              })
+        });
   }
 
   toggle() {
@@ -89,7 +93,6 @@ export class BlogComponent implements OnInit{
     this.activeParams.categories = this.activeParams.categories.filter(item => item !== appliedFilter.urlParam);
     this.activeParams.page = 1;
 
-    this.activeParams.page = 1;
     this.router.navigate(['/blog'], {
       queryParams: this.activeParams
     });
@@ -112,6 +115,7 @@ export class BlogComponent implements OnInit{
       });
     }
   }
+
   openNextPage() {
     if (!this.activeParams.page) {
       this.activeParams.page = 1;
