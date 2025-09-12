@@ -10,7 +10,7 @@ import { ArticleType } from 'src/types/article.type';
 })
 export class ArticleCardComponent implements OnInit{
 
-  @Input() article!: ArticleType;
+  @Input() article: ArticleType = {} as ArticleType;
 
   serverStaticPath = environment.serverStaticPath;
   constructor(private router: Router) {

@@ -13,8 +13,8 @@ import { ArticleType } from 'src/types/article.type';
 })
 export class MainComponent implements OnInit{
 
-  @ViewChild('popup') popup!: TemplateRef<ElementRef>;
-  @ViewChild('popupThanks') popupThanks!: TemplateRef<ElementRef>;
+  @ViewChild('popup') popup: TemplateRef<ElementRef> | undefined;
+  @ViewChild('popupThanks') popupThanks: TemplateRef<ElementRef>| undefined;
 
   dialogRef: MatDialogRef<any> | null = null;
   dialogRefThanks: MatDialogRef<any> | null = null;
@@ -95,7 +95,7 @@ export class MainComponent implements OnInit{
     {
       image: 'image1.png',
       title: 'Создание сайтов',
-      text: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса!',
+      text: 'В краткие сроки мы создадим качественный и самое главеое продающий сайт для продвижения Вашего бизнеса!',
       price: '7 500'
     },
     {
@@ -147,7 +147,11 @@ export class MainComponent implements OnInit{
       name: '',
       phone: '',
     });
-    this.dialogRef = this.dialog.open(this.popup);
+
+    // Добавляем проверку на undefined
+    if (this.popup) {
+      this.dialogRef = this.dialog.open(this.popup);
+    }
   }
 
   closePopup(popup: string) {
@@ -158,7 +162,11 @@ export class MainComponent implements OnInit{
   leaveInfo(type: string) {
     if (this.serviceForm.valid) {
       this.dialogRef?.close();
-      this.dialogRefThanks = this.dialog.open(this.popupThanks);
+
+      // Добавляем проверку на undefined
+      if (this.popupThanks) {
+        this.dialogRefThanks = this.dialog.open(this.popupThanks);
+      }
 
       if (this.serviceForm.value.name && this.serviceForm.value.phone && this.serviceForm.value.service && type === 'order') {
         this.requestsService.sendRequest(this.serviceForm.value.name, this.serviceForm.value.phone.toString(),type , this.serviceForm.value.service)

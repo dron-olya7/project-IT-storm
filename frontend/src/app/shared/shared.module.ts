@@ -4,9 +4,6 @@ import { RouterLink } from '@angular/router';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
 import { CommentComponent } from './components/comment/comment/comment.component';
 
-
-
-
 @NgModule({
 
   imports: [

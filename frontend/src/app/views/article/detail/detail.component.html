@@ -108,7 +108,7 @@
               placeholder="Напишите Ваш комментарий к статье"
               [(ngModel)]="comment"
             ></textarea>
-            <button class="button" type="submit" (click)="sendComment()">
+            <button class="button" type="submit" (click)="sendComment()" [disabled]="!comment || comment.trim().length === 0">
               Опубликовать комментарий
             </button>
           </div>

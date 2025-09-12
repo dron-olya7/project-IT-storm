@@ -17,7 +17,7 @@ import { CommentType } from '../../../../types/comment.type';
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
-  article!: DetailArticleType;
+  article: DetailArticleType = {} as DetailArticleType;
   articlesRelated: ArticleType[] = [];
   serverStaticPath: string = environment.serverStaticPath;
   isLogged: boolean = false;
@@ -35,7 +35,8 @@ export class DetailComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private commentService: CommentService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.showSmallComments = true;

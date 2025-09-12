@@ -11,8 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-
-
 export class HeaderComponent {
   isLogged: boolean = false;
   userInfo: UserInfoType | null = null;
@@ -24,7 +22,8 @@ export class HeaderComponent {
               private userService: UserService) {
     this.isLogged = this.authService.getIsLoggedIn();
   }
-    ngOnInit() {
+
+  ngOnInit() {
     if (this.isLogged) {
       this.userService.getUserInfo()
         .subscribe(data => {
@@ -45,7 +44,7 @@ export class HeaderComponent {
       });
   }
 
-    logout() {
+  logout() {
     this.authService.logout()
       .subscribe({
         next: () => {
@@ -63,6 +62,45 @@ export class HeaderComponent {
     this._snackBar.open('Вы вышли из системы');
     this.router.navigate(['/']);
   }
+
+  scrollToSection(sectionId: string): void {
+    // Если мы уже на главной странице
+    if (this.router.url === '/') {
+      // Добавляем задержку для полной загрузки страницы
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          // Плавная прокрутка к элементу
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+
+          // Обновляем URL с якорем
+          this.router.navigate([], {
+            fragment: sectionId,
+            replaceUrl: true
+          });
+        }
+      }, 100);
+    } else {
+      // Если мы не на главной странице, переходим на главную с якорем
+      this.router.navigate(['/'], { fragment: sectionId })
+        .then(() => {
+          // После навигации добавляем задержку для прокрутки
+          setTimeout(() => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }, 300); // Большая задержка при переходе между страницами
+        });
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   click(event: Event) {
     if ((event.target as HTMLElement)) {
@@ -75,7 +113,7 @@ export class HeaderComponent {
           }
         }
       } catch (error) {
-
+        // Обработка ошибок, если необходимо
       }
     }
   }
